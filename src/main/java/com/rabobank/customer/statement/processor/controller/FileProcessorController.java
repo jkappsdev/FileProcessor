@@ -28,12 +28,12 @@ public class FileProcessorController {
 
 	@PostMapping
 	@RequestMapping(path = "/processFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile receivedFile) {
-		System.out.println("Hey Man" + receivedFile);
+	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile records) {
+		System.out.println("Hey Man" + records);
 		try {
-			FileProcessorController.LOGGER.info("processFile" + " -  " +  receivedFile.getOriginalFilename());
-			String fileType = this.service.determineFileType(receivedFile);
-			return ResponseEntity.ok().body(ServiceRequestor.requestService(fileType).process(receivedFile));
+			FileProcessorController.LOGGER.info("processFile" + " -  " +  records.getOriginalFilename());
+			String fileType = this.service.determineFileType(records);
+			return ResponseEntity.ok().body(ServiceRequestor.requestService(fileType).process(records));
 		} catch (Exception e) {
 			FileProcessorController.LOGGER.info("processFile" + " -  " + "Exception " + e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
