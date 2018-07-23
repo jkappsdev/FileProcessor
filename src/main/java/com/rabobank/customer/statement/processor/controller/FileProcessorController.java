@@ -29,7 +29,6 @@ public class FileProcessorController {
 	@PostMapping
 	@RequestMapping(path = "/processFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile records) {
-		System.out.println("Hey Man" + records);
 		try {
 			FileProcessorController.LOGGER.info("processFile" + " -  " +  records.getOriginalFilename());
 			String fileType = this.service.determineFileType(records);
