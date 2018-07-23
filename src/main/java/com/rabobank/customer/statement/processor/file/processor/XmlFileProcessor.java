@@ -13,6 +13,14 @@ import com.rabobank.customer.statement.processor.bo.Records;
 import com.rabobank.customer.statement.processor.controller.FileProcessorService;
 import com.rabobank.customer.statement.processor.service.handler.Service;
 
+/**
+ * 
+ * @author Karthik Janakiraman
+ * 
+ * The class overrides the process method from Service interface for processing XML files
+ *
+ * @param <E>
+ */
 public class XmlFileProcessor<E> implements Service<E> {
 
 	public XmlFileProcessor() {
@@ -40,6 +48,11 @@ public class XmlFileProcessor<E> implements Service<E> {
 		}
 	}
 
+	/**
+	 * Constructs RecordBO from the Multipartfile input
+	 * @param file
+	 * @return
+	 */
 	private Records constructRecordBOFromFile(MultipartFile file) {
 		XmlFileProcessor.LOGGER.info("constructRecordBOFromFile");
 		Records records = null;

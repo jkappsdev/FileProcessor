@@ -11,11 +11,20 @@ import com.rabobank.customer.statement.processor.bo.Record;
 import com.rabobank.customer.statement.processor.controller.FileProcessorService;
 import com.rabobank.customer.statement.processor.service.handler.Service;
 
+/**
+ * 
+ * @author Karthik Janakiraman
+ * 
+ * The class overrides the process method from Service interface for processing CSV files
+ *
+ * @param <E>
+ */
 public class CsvFileProcessor<E> implements Service<E> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CsvFileProcessor.class);
 	
 	private FileProcessorService service = new FileProcessorService();
+
 	
 	@Override
 	public String process(MultipartFile bytes) {
@@ -30,6 +39,11 @@ public class CsvFileProcessor<E> implements Service<E> {
 		}
 	}
 
+	/**
+	 * Constructs the required transaction object from the Multipartfile input
+	 * @param arrayOfRecord
+	 * @return
+	 */
 	private List<Record> constructRecordBOFromFile(String[] arrayOfRecord) {
 		CsvFileProcessor.LOGGER.info("constructRecordBOFromFile");
 		List<Record> transactions =  new ArrayList<>();

@@ -14,6 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rabobank.customer.statement.processor.service.handler.ServiceRequestor;
 
+/**
+ * 
+ * @author Karthik Janakiraman
+ * 
+ * Controller class that holds the end-points required for file processing.
+ *
+ */
 @RestController
 public class FileProcessorController {
 
@@ -26,6 +33,12 @@ public class FileProcessorController {
 		this.service = service;
 	}
 
+	/**
+	 * Returns the ResponseEntity after processing the file
+	 * 
+	 * @param records is a MultiPartFile
+	 * @return ResponseEntity
+	 */
 	@PostMapping
 	@RequestMapping(path = "/processFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile records) {

@@ -14,11 +14,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rabobank.customer.statement.processor.bo.Record;
 
+/**
+ * 
+ * @author Karthik Janakiraman
+ * 
+ * The service class consists of various service methods that are required for processing the input files.
+ *
+ */
 @Service
 public class FileProcessorService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileProcessorService.class);
 
+	/**
+	 * Returns the type of the input file
+	 * @param receivedFile
+	 * @return fileType
+	 */
 	public String determineFileType(MultipartFile receivedFile) {
 		FileProcessorService.LOGGER.info("determineFileType");
 		String fileName = receivedFile.getOriginalFilename();
@@ -26,6 +38,11 @@ public class FileProcessorService {
 		return fileType;
 	}
 
+	/**
+	 * Returns a string of invalid transactions with description for every invalid transaction.
+	 * @param transactions
+	 * @return string
+	 */
 	public String getInvalidTransactions(List<Record> transactions) {
 		FileProcessorService.LOGGER.info("getInvalidTransactions");
 		StringBuilder sb = new StringBuilder();
@@ -37,39 +54,61 @@ public class FileProcessorService {
 		return sb.toString();
 	}
 
+	/**
+	 * Returns a list of invalid transactions
+	 * @param transactionRecords
+	 * @return
+	 */
 	public List<Record> validateTransactions(List<Record> transactionRecords) {
 		FileProcessorService.LOGGER.info("validateTransactions");
-		Map<Integer, List<Record>> transactionRefCount = new HashMap<>();
+		Map<Integer, List<Record>> transactionReferenceCountMap = new HashMap<>();
 		List<Record> incorrectTransactions = new ArrayList<>();
 		for (Record bo : transactionRecords) {
 			int transactionReference = bo.getReference();
 			
-			if (transactionRefCount.containsKey(transactionReference)) {
-				transactionRefCount.get(transactionReference).add(bo);
+			if (transactionReferenceCountMap.containsKey(transactionReference)) {
+				transactionReferenceCountMap.get(transactionReference).add(bo);
 			} else {
-				addToExistingListForExistingTransaction(transactionRefCount, bo, transactionReference);
+				addToExistingListForDuplicateTransaction(transactionReferenceCountMap, bo, transactionReference);
 			}
 			
-			addIncorrectendValueTransactionToMap(incorrectTransactions, bo, calculateEndBalance(bo));
+			addIncorrectEndValueTransactionToMap(incorrectTransactions, bo, calculateEndBalance(bo));
 		}
-		addDuplicateTransactionToMap(transactionRefCount, incorrectTransactions);
+		addDuplicateTransactionToList(transactionReferenceCountMap, incorrectTransactions);
 		return incorrectTransactions;
 	}
 
-	private void addToExistingListForExistingTransaction(Map<Integer, List<Record>> transactionRefCount, Record bo,
+	/**
+	 * Adds the duplicate transaction to the map
+	 * @param transactionReferenceCountMap
+	 * @param record
+	 * @param transactionReference
+	 */
+	private void addToExistingListForDuplicateTransaction(Map<Integer, List<Record>> transactionReferenceCountMap, Record record,
 			int transactionReference) {
 		List<Record> list = new ArrayList<>();
-		list.add(bo);
-		transactionRefCount.put(transactionReference, list);
+		list.add(record);
+		transactionReferenceCountMap.put(transactionReference, list);
 	}
 
-	private void addIncorrectendValueTransactionToMap(List<Record> incorrectTransactions, Record bo, float endBalance) {
-		if (endBalance != bo.getEndBalance()) {
-			incorrectTransactions.add(bo);
+	/**
+	 * Adds the invalid transaction, to the list containing the invalid transaction, whose end value is incorrect after mutation
+	 * @param incorrectTransactions
+	 * @param record
+	 * @param endBalance
+	 */
+	private void addIncorrectEndValueTransactionToMap(List<Record> incorrectTransactions, Record record, float endBalance) {
+		if (endBalance != record.getEndBalance()) {
+			incorrectTransactions.add(record);
 		}
 	}
 
-	private void addDuplicateTransactionToMap(Map<Integer, List<Record>> transactionRefCount,
+	/**
+	 * Adds the duplicate transaction reference to the list containing the invalid transaction
+	 * @param transactionRefCount
+	 * @param incorrectTransactions
+	 */
+	private void addDuplicateTransactionToList(Map<Integer, List<Record>> transactionRefCount,
 			List<Record> incorrectTransactions) {
 		for (Map.Entry<Integer, List<Record>> entry : transactionRefCount.entrySet()) {
 			if (entry.getValue().size() > 1) {
@@ -78,6 +117,11 @@ public class FileProcessorService {
 		}
 	}
 
+	/**
+	 * Calculate the end balance and returns the float value
+	 * @param bo
+	 * @return
+	 */
 	private float calculateEndBalance(Record bo) {
 		NumberFormat formatter = requiredNumberFormat();
 		float startBalance = bo.getStartBalance();
@@ -89,14 +133,34 @@ public class FileProcessorService {
 			return additiveMutation(formatter, startBalance, mutation, length);
 	}
 
+	/**
+	 * Calculate end value after mutation and returns the float value
+	 * @param formatter
+	 * @param startBalance
+	 * @param mutation
+	 * @param length
+	 * @return
+	 */
 	private Float additiveMutation(NumberFormat formatter, float startBalance, String mutation, int length) {
 		return new Float(formatter.format((startBalance + Float.parseFloat(mutation.substring(1, length)))));
 	}
 
+	/**
+	 * Calculate end value after mutation and returns the float value
+	 * @param formatter
+	 * @param startBalance
+	 * @param mutation
+	 * @param length
+	 * @return
+	 */
 	private Float deductiveMutation(NumberFormat formatter, float startBalance, String mutation, int length) {
 		return new Float(formatter.format((startBalance - Float.parseFloat(mutation.substring(1, length)))));
 	}
 
+	/**
+	 * Returns the required number formatter
+	 * @return
+	 */
 	private NumberFormat requiredNumberFormat() {
 		NumberFormat formatter = NumberFormat.getInstance(Locale.US);
 		formatter.setMinimumFractionDigits(2);
