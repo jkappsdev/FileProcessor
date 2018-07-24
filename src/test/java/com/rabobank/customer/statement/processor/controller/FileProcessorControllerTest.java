@@ -40,14 +40,14 @@ public class FileProcessorControllerTest {
 
 	@Test
 	public void testProcessFile() throws Exception {
-		MockMultipartFile receivedFile = MultiPartFileInput.generateInputMultiPartFile(CsvIO.getCSVInput());
+		MockMultipartFile records = MultiPartFileInput.generateInputMultiPartFile(CsvIO.getCSVInput());
 
 		when(service.determineFileType(Mockito.<MultipartFile> any())).thenReturn("csv");
 		
 		String expectedString = CsvIO.expectedOutput();
 		
 		MvcResult result = mockMvc
-				.perform(multipart("/processFile").file(receivedFile).contentType(MediaType.MULTIPART_FORM_DATA_VALUE))
+				.perform(multipart("/processFile").file(records).contentType(MediaType.MULTIPART_FORM_DATA_VALUE))
 				.andExpect(status().isOk()).andReturn();
 		
 

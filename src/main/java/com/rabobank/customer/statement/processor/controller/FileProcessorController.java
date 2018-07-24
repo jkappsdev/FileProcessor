@@ -36,16 +36,16 @@ public class FileProcessorController {
 	/**
 	 * Returns the ResponseEntity after processing the file
 	 * 
-	 * @param records is a MultiPartFile
+	 * @param file is a MultiPartFile
 	 * @return ResponseEntity
 	 */
 	@PostMapping
 	@RequestMapping(path = "/processFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile records) {
+	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile file) {
 		try {
-			FileProcessorController.LOGGER.info("processFile" + " -  " +  records.getOriginalFilename());
-			String fileType = this.service.determineFileType(records);
-			return ResponseEntity.ok().body(ServiceRequestor.requestService(fileType).process(records));
+			FileProcessorController.LOGGER.info("processFile" + " -  " +  file.getOriginalFilename());
+			String fileType = this.service.determineFileType(file);
+			return ResponseEntity.ok().body(ServiceRequestor.requestService(fileType).process(file));
 		} catch (Exception e) {
 			FileProcessorController.LOGGER.info("processFile" + " -  " + "Exception " + e.getMessage());
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
