@@ -50,9 +50,6 @@ public class FileProcessorControllerTest {
 				.perform(multipart("/processFile").file(records).contentType(MediaType.MULTIPART_FORM_DATA_VALUE))
 				.andExpect(status().isOk()).andReturn();
 		
-
-		System.out.println("expectedString :" + expectedString);
-		System.out.println("result.getResponse().getContentAsString(): " + result.getResponse().getContentAsString());
 		assertEquals(expectedString, result.getResponse().getContentAsString());
 
 	}
