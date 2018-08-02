@@ -1,9 +1,12 @@
 package com.rabobank.customer.statement.processor.controller.common;
 
+import static java.nio.charset.StandardCharsets.*;
+
 public class XmlIO {
 
 	public static String getXMLInput() {
-		String inputString = "<records>\n" + "<record reference=\"130498\">\n"
+		
+		String xmlAsString = "<records>\n" + "<record reference=\"130498\">\n"
 				+ "<accountNumber>NL69ABNA0433647324</accountNumber>\n"
 				+ "<description>Tickets for Peter Theuﬂ</description>\n"
 				+ "<startBalance>26.9</startBalance>\n"
@@ -74,13 +77,23 @@ public class XmlIO {
 				+ "<endBalance>59.61</endBalance>\n"
 				+ "</record>\n"
 				+ "</records>";
+		
+		byte[] ptext = xmlAsString.getBytes(ISO_8859_1); 
+		String inputString = new String(ptext, UTF_8); 
+		
 		return inputString;
 	}
 
 	public static String expectedOutput() {
 		
-		return "Transaction reference number: 167875 , Description is :Tickets from Erik de Vries\n"
-			+	"Transaction reference number: 165102 , Description is :Tickets for Rik Theu√ü\n";
+		String expectedOutput = "Transaction reference number: 167875 , Description is :Tickets from Erik de Vries\n"
+			+	"Transaction reference number: 165102 , Description is :Tickets for Rik Theuﬂ\n";
+		
+		byte[] ptext = expectedOutput.getBytes(ISO_8859_1); 
+		String expectedString = new String(ptext, UTF_8); 
+		
+		return expectedString;
+
 	}
 
 }

@@ -40,7 +40,7 @@ public class FileProcessorController {
 	 * @return ResponseEntity
 	 */
 	@PostMapping
-	@RequestMapping(path = "/processFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@RequestMapping(path = "/processFile" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<String> processFile(@RequestParam(required = false) MultipartFile file) {
 		try {
 			FileProcessorController.LOGGER.info("processFile" + " -  " +  file.getOriginalFilename());
