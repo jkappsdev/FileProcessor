@@ -43,3 +43,10 @@ If the port **8080** is being used by any other application, then make the follo
 1. Use postman or any other tool that can interact with HTTP APIs.
 2. Attach the **'records.csv'** or **'records.xml'**(The sample files are available in 'src/main/resources' folder) file along with the request and hit the URL it.
 3. Response will be the list of transaction references that are not valid.
+
+## How to test using POSTMAN:
+1. Create a new request in postman.
+2. Ensure that the type of request is POST.
+3. Key in the REST URI.
+4. Add the authentication credentials as shown in the image below and update the request.
+![Add Authentication](FileProcessor/AddAuthentication.JPG)
