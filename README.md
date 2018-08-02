@@ -13,7 +13,7 @@ The following software are necessary and can be downloaded from the links given 
 1. [JDK 1.8](http://www.oracle.com/technetwork/java/javaee/downloads/index.html).
 2. [Gradle 4.8.1](https://gradle.org/releases/).
 3. [Eclipse](https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-java-ee-developers).
-4. Install Gradle plugin in Eclipse.
+4. [Gradle plugin](http://marketplace.eclipse.org/content/buildship-gradle-integration) for Eclipse.
 
 After downloading JDK and Gradle, set up the environment variable in your system.
 
