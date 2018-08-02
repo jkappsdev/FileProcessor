@@ -47,7 +47,16 @@ If the port **8080** is being used by any other application, then make the follo
 ## How to test using POSTMAN:
 1. Create a new request in postman.
 2. Ensure that the type of request is POST.
-3. Key in the REST URI.
-4. Add the authentication credentials as shown in the image below and update the request.
+3. Key in the REST URI, 'http://localhost:8080/processFile'
+4. In the **Authorization** tab, add the authentication credentials as shown in the image below and update the request.
 
-![Adding Authentication](/AddAuthentication.JPG)
+![Adding Authentication](/informationalFiles/AddAuthenticationImg.JPG)
+
+5. In the **Body** tab, add a key named 'file' and choose the file that needs to be processed a shown in the image below.
+
+![Adding file](/informationalFiles/AddFileImg.JPG)
+
+6. Send the request and the resulting JSON will be returned as shown in the image below.
+
+![Adding file](/informationalFiles/ResultingJSONImg.JPG)
+
