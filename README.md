@@ -49,4 +49,5 @@ If the port **8080** is being used by any other application, then make the follo
 2. Ensure that the type of request is POST.
 3. Key in the REST URI.
 4. Add the authentication credentials as shown in the image below and update the request.
-![Add Authentication](FileProcessor/AddAuthentication.JPG)
+
+(FileProcessor/AddAuthentication.JPG)
