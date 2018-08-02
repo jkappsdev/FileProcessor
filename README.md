@@ -49,6 +49,8 @@ If the port **8080** is being used by any other application, then make the follo
 2. Ensure that the type of request is POST.
 3. Key in the REST URI, 'http://localhost:8080/processFile'
 4. In the **Authorization** tab, add the authentication credentials as shown in the image below and update the request.
+Username is, "username"
+Password is, "password"
 
 ![Adding Authentication](/informationalFiles/AddAuthenticationImg.JPG)
 
