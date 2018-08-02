@@ -10,9 +10,9 @@ Any discrepencies found during the validation will be sent as an output to the v
 
 ## Getting Started
 The following software are necessary and can be downloaded from the links given below.
-1. Download [JDK 1.8](http://www.oracle.com/technetwork/java/javaee/downloads/index.html).
-2. Download [Gradle 4.8.1](https://gradle.org/releases/).
-3. Download [Eclipse](https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-java-ee-developers).
+1. [JDK 1.8](http://www.oracle.com/technetwork/java/javaee/downloads/index.html).
+2. [Gradle 4.8.1](https://gradle.org/releases/).
+3. [Eclipse](https://www.eclipse.org/downloads/packages/release/photon/r/eclipse-ide-java-ee-developers).
 4. Install Gradle plugin in Eclipse.
 
 After downloading JDK and Gradle, set up the environment variable in your system.
