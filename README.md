@@ -32,9 +32,14 @@ After downloading JDK and Gradle, set up the environment variable in your system
 ### Option 2: Running as Spring Boot fom the Eclipse IDE
 1. As the project is imported as a Gradle project, you can run it from the IDE as a Spring Boot App.
 
+## That's it! The application can be accessed at http://localhost:8080
 
-How to test it:
+If the port **8080** is being used by any other application, then make the following entry in application.properties and use the port that is free.
 
-1. Use postman or any other tool to post the request.
-2. Attach the 'records.csv' or 'records.xml' file along with the request and post it.
-3. Response entity will be returned as what is expected out of the project.
+**server.port=******
+
+## Testing the API:
+
+1. Use postman or any other tool that can interact with HTTP APIs.
+2. Attach the 'records.csv' or 'records.xml' file along with the request and hit the URL it.
+3. Response will be the list of transaction references that are not valid.
