@@ -36,10 +36,10 @@ After downloading JDK and Gradle, set up the environment variable in your system
 
 If the port **8080** is being used by any other application, then make the following entry in application.properties and use the port that is free.
 
-**server.port=******
+**server.port=8081**
 
 ## Testing the API:
 
 1. Use postman or any other tool that can interact with HTTP APIs.
-2. Attach the 'records.csv' or 'records.xml' file along with the request and hit the URL it.
+2. Attach the **'records.csv'** or **'records.xml'**(The sample files are available in 'src/main/resources' folder) file along with the request and hit the URL it.
 3. Response will be the list of transaction references that are not valid.
