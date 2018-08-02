@@ -32,7 +32,7 @@ After downloading JDK and Gradle, set up the environment variable in your system
 ### Option 2: Running as Spring Boot fom the Eclipse IDE
 1. As the project is imported as a Gradle project, you can run it from the IDE as a Spring Boot App.
 
-## That's it! The application can be accessed at http://localhost:8080
+**That's it! The application can be accessed at** http://localhost:8080
 
 If the port **8080** is being used by any other application, then make the following entry in application.properties and use the port that is free.
 
