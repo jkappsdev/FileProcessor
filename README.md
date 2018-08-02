@@ -55,3 +55,8 @@ If the port **8080** is being used by any other application, then make the follo
 5. In the **Body** tab, add a key named 'file' and choose the file that needs to be processed a shown in the image below.
 
 ![Adding file](/informationalFiles/AddFileImg.JPG)
+
+6. Send the request and the resulting JSON will be returned as shown in the image below.
+
+![Adding file](/informationalFiles/ResultingJSONImg.JPG)
+
