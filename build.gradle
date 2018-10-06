@@ -62,7 +62,7 @@ dependencies {
 	compile 'mysql:mysql-connector-java'
 
 	//other
-	compileOnly 'org.projectlombok:lombok'
+	compileOnly("org.projectlombok:lombok:1.18.2")
 	/**** TEST ****/
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
